@@ -6,11 +6,6 @@ module.exports=function(app){
             target:"http://localhost:5000",
             changeOrigin:true,
             pathRewrite:{"^/api":""}
-        }),
-        proxy("/getWeather",{
-            target:"https://api.map.baidu.com",
-            changeOrigin:true,
-            pathRewrite:{"^/getWeather":""}
         })
     )
 }
