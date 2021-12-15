@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class Pie extends Component {
+export default class User extends Component {
     render() {
         return (
             <div>
-                pie-------
+                用户管理
             </div>
         )
     }

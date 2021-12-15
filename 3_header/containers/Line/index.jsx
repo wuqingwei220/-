@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 
-export default class Pie extends Component {
+export default class Line extends Component {
     render() {
         return (
             <div>
-                pie-------
+                line
             </div>
         )
     }
 }
+
+

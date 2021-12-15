@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {reqLogin} from '../../api' 
 import {saveUserInfo} from '../../redux/actions/login'
-import Logo from '../../static/images/logo.png'
+import Logo from './images/logo.png'
 import  './index.less'
 const {Item} = Form;
 @connect(
@@ -38,7 +38,7 @@ const {Item} = Form;
            const {status,msg,data:{token},data:{user}} = result;
            if(status===0){
                this.props.saveUserInfo({user,token})
-               this.props.history.replace("/admin/home")
+               this.props.history.replace("/admin")
            }else{
                message.warning(msg)
            }

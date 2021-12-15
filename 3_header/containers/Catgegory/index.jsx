@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class Pie extends Component {
+export default class Catgegory extends Component {
     render() {
         return (
             <div>
-                pie-------
+                Catgegory
             </div>
         )
     }

@@ -2,28 +2,17 @@ import React, { Component } from 'react'
 import {Icon,Button,Modal} from 'antd'
 import moment from 'moment'
 import {withRouter} from 'react-router-dom'
-import {connect} from 'react-redux'
 // 展开全屏
 import screenfull from 'screenfull'
 import './css/header.less'
 import store from '../../../redux/store'
 import {getWeather} from '../../../api/index'
-import menuList from '../../../config/menuConfig'
-import {addHeader} from '../../../redux/actions/header'
-
-@connect(
-  state=>({routerKey:state.saveHeader.routerKey}),
-    {
-      addHeader
-    }
-)
 @withRouter
 class Header extends Component {
   state={
     logoutVisible:false,
     dateTime:new Date(),
-    statusIcon:false,
-    defaultTitle:''
+    statusIcon:false
   }
   logout = () => {
     this.setState({
@@ -46,63 +35,37 @@ class Header extends Component {
   screenFull = () => {
     screenfull.toggle()
   }
-
+  componentDidMount(){
+     this.timer=setInterval(()=>{
+        this.setState({
+          dateTime:new Date()
+        })
+     },1000)
+    //  监听全屏状态
+     screenfull.on("change",()=>{
+       this.setState({
+          statusIcon:!this.state.statusIcon
+       })
+     })
+    //  获取天气预报
+    this.getWeather()
+   
+  }
   // 获取天气预报
   getWeather=async()=>{
     let result=await getWeather()
     this.text_day=result.result.forecasts[0].text_day;
     this.wd_night=result.result.forecasts[0].wd_night;
     this.wc_night=result.result.forecasts[0].wc_night;
+    console.log("天气预报",result)
   }
-  // 匹配标题
-  getTitle=(data)=>{
-    const {pathname}=this.props.location;
-    const routerArr=pathname.split("/").reverse()[0]
-    let title;
-     data.forEach((item)=>{
-      if(!item.children){
-        if(item.key===routerArr){
-          title=item.title
-        }
-      }else if(item.children instanceof Array){
-          // this.getTitle(item.children)
-          item.children.forEach((citem)=>{
-            if(citem.key===routerArr){
-              title=citem.title
-            }
-          })
-      }
-    })
-     this.setState({
-       defaultTitle:title
-     })
-     this.props.addHeader({routerKey:title})
-
-  }
-  componentDidMount(){
-    //获取title
-    this.getTitle(menuList)
-    this.timer=setInterval(()=>{
-       this.setState({
-         dateTime:new Date()
-       })
-    },1000)
-   //  监听全屏状态
-    screenfull.on("change",()=>{
-      this.setState({
-         statusIcon:!this.state.statusIcon
-      })
-    })
-   //  获取天气预报
-   this.getWeather()
-   
- }
   componentWillUnmount(){
       clearInterval(this.timer)
   }
     render() {
       const {username}=store.getState().saveUserInfo.user
-      const {statusIcon,defaultTitle}=this.state;
+      const {statusIcon}=this.state;
+      const {pathname} =this.props.location;
         return (
           <header>
                <div className='header-top'>
@@ -114,7 +77,7 @@ class Header extends Component {
                </div>
                <div className='header-bottom'>
                    <div className='header-bottom-left'>
-                       {this.props.routerKey?this.props.routerKey:defaultTitle}
+                       <span>{pathname}</span>
                    </div>
                    <div className='header-bottom-right'>
                        <span>{moment(this.state.dateTime).format("YYYY-MM-DD hh:mm:ss")}</span>&nbsp;&nbsp;

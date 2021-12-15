@@ -15,11 +15,6 @@ export const getWeather=()=>ajax.get(`${BASE_URL}/getWeather/weather/v1/`,{
     }
 })
 
-//获取商品的分类
-export const getCategory=()=>ajax.get(`${BASE_URL}/api/manage/category/list`)
-//修改商品分类
-export const reqModifyCategory=(data)=>ajax.post(`${BASE_URL}/api/manage/category/update`,data)
-
 // export const getWeather=()=>{
     // return new Promise((resolve)=>{
     //     jsonp(`https://api.map.baidu.com/weather/v1/?district_id=${DISTRICT_ID}&data_type=${DATA_TYPE}&ak=${AK}`
