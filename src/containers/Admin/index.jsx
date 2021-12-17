@@ -16,6 +16,8 @@ import  Role  from '../Role'
 import  Bar  from '../Bar'
 import  Line  from '../Line'
 import  Pie  from '../Pie'
+import  DetailProduct from '../Product/Detail'
+import  AddUpdate from '../Product/Add_update'
 
 import { Layout} from 'antd';
 const { Header, Content ,Footer} = Layout;
@@ -60,9 +62,12 @@ const { Header, Content ,Footer} = Layout;
                     }}
                 >
                     <Switch>
-                        <Route path="/admin/home" component={Home}></Route>
+                        <Route path="/admin/home" component={Home}></Route>DetailProduct
                         <Route path="/admin/prod_about/category" component={Catgegory}></Route>
-                        <Route path="/admin/prod_about/product" component={Product}></Route>
+                        <Route path="/admin/prod_about/product" exact component={Product}></Route>
+                        <Route path="/admin/prod_about/product/detail/:id" component={DetailProduct}></Route>
+                        <Route path="/admin/prod_about/product/add_update" component={AddUpdate} exact></Route>
+                        <Route path="/admin/prod_about/product/add_update/:id" component={AddUpdate}></Route>
                         <Route path="/admin/user" component={User}></Route>
                         <Route path="/admin/role" component={Role}></Route>
                         <Route path="/admin/charts/bar" component={Bar}></Route>

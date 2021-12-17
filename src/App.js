@@ -9,7 +9,7 @@ import Admin from './containers/Admin'
                 <Switch>
                     <Route path="/login" component={Login}></Route>
                     <Route path="/admin" component={Admin}></Route>
-                    <Redirect to="/admin"></Redirect>
+                    <Redirect to="/admin/home"></Redirect>
                 </Switch>
             </Fragment>
               

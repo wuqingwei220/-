@@ -86,7 +86,7 @@ const {Sider} = Layout;
                </Button>
                 </div>
                 <Menu
-                    defaultSelectedKeys={this.props.location.pathname.split("/").reverse()[0]}
+                    selectedKeys={this.props.location.pathname.includes("product")?"product":this.props.location.pathname.split("/").reverse()[0]}
                     defaultOpenKeys={this.props.location.pathname.split("/").splice(2)}
                     mode="inline"
                     theme="dark"

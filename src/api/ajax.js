@@ -15,12 +15,10 @@ fetch.interceptors.request.use((config)=>{
     
     const {method,data,headers}=config;
     const {token} =store.getState().saveUserInfo;
-    console.log(headers)
     if(token) headers.authorization=token
     if(method==="post"){
         if(data instanceof Object){
             config.data=qs.stringify(data)
-            console.log(data)
         }
     }
     return config;
@@ -31,7 +29,6 @@ fetch.interceptors.request.use((config)=>{
 fetch.interceptors.response.use((res)=>{
   NProgress.done()  
 
-  console.log("res",res)
   return res.data;
 },error=>{
     NProgress.done()  

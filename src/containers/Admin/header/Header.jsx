@@ -10,11 +10,13 @@ import store from '../../../redux/store'
 import {getWeather} from '../../../api/index'
 import menuList from '../../../config/menuConfig'
 import {addHeader} from '../../../redux/actions/header'
+import {deleteUserInfo} from '../../../redux/actions/login'
 
 @connect(
   state=>({routerKey:state.saveHeader.routerKey}),
     {
-      addHeader
+      addHeader,
+      deleteUserInfo
     }
 )
 @withRouter
@@ -31,7 +33,7 @@ class Header extends Component {
     });  
   }
   handleOk = e => {
-    this.props.logout()
+    this.props.deleteUserInfo()
     this.setState({
       logoutVisible: false,
     });
@@ -56,9 +58,10 @@ class Header extends Component {
   }
   // 匹配标题
   getTitle=(data)=>{
-    const {pathname}=this.props.location;
-    const routerArr=pathname.split("/").reverse()[0]
+    let {pathname}=this.props.location;
+    let routerArr=pathname.split("/").reverse()[0]
     let title;
+    if(pathname.split("/").indexOf("product")!=="-1") routerArr="product"
      data.forEach((item)=>{
       if(!item.children){
         if(item.key===routerArr){

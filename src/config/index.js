@@ -8,3 +8,8 @@ export const   DATA_TYPE='all'
 
 export const   AK='7zaABosFYIipGRKwVh0RZiqRkdHplGIp'
 
+export const   PAGE_SIZE=5
+
+
+
+

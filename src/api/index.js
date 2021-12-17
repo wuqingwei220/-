@@ -19,6 +19,31 @@ export const getWeather=()=>ajax.get(`${BASE_URL}/getWeather/weather/v1/`,{
 export const getCategory=()=>ajax.get(`${BASE_URL}/api/manage/category/list`)
 //修改商品分类
 export const reqModifyCategory=(data)=>ajax.post(`${BASE_URL}/api/manage/category/update`,data)
+// 添加分类
+export const reqAddCategory=(data)=>ajax.post(`${BASE_URL}/api/manage/category/add`,data)
+// 获取商品分页列表
+export const reqProductList=(params)=>ajax.get(`${BASE_URL}/api/manage/product/list`,{params})
+
+// 上下架商品manage/product/updateStatus
+export const reqUpdateStatus=(data)=>ajax.post(`${BASE_URL}/api/manage/product/updateStatus`,data)
+
+// 商品搜索
+
+export  const reqProductListSearch=(params)=>ajax.get(`${BASE_URL}/api/manage/product/search`,{params})
+
+// 获取商品的详情信息
+export const reqProductInfo=(params)=>ajax.get(`${BASE_URL}/api/manage/product/info`,{params})
+
+// 根据分类获取商品的分类
+export const reqProductCategory=(params)=>ajax.get(`${BASE_URL}/api/manage/category/info`,{params})
+
+
+
+
+
+
+
+
 
 // export const getWeather=()=>{
     // return new Promise((resolve)=>{
