@@ -36,8 +36,8 @@ class Detail extends Component {
     getProductInfo=async()=>{
         const {getReduxProdList} =this.props; 
         // find 是返回一个满足条件对象  ====   filter 返回是个新的数组  map 返回新数组 主要是返回修改过后的数组 所有的
-        let  screenData=getReduxProdList.find((item)=>item._id===this.props.match.params.id) 
         if(getReduxProdList.length>0){
+            let  screenData=getReduxProdList.find((item)=>item._id===this.props.match.params.id) 
             this.setState({
                 productInfo:screenData,
                 categoryId:screenData.categoryId,
