@@ -96,7 +96,7 @@ class Detail extends Component {
                       {
                           imgs?
                           imgs.map((item)=>{
-                              return <img src={`${BASE_URL}/api/upload/${item}`} key={item} alt="icon" />
+                              return <img style={{width:"200px"}} src={`${BASE_URL}/api/upload/${item}`} key={item} alt="icon" />
                           }):""
                       }
                     </Item>

@@ -38,6 +38,20 @@ export const reqProductInfo=(params)=>ajax.get(`${BASE_URL}/api/manage/product/i
 export const reqProductCategory=(params)=>ajax.get(`${BASE_URL}/api/manage/category/info`,{params})
 
 
+// 删除图片
+
+export const reqDeletePic=(data)=>ajax.post(`${BASE_URL}/api/manage/img/delete`,data)
+
+// 添加商品
+
+export const reqProductAdd=(data)=>ajax.post(`${BASE_URL}/api/manage/product/add`,data)
+
+// 修改商品
+
+export const reqUpdateProduct=(data)=>ajax.post(`${BASE_URL}/api/manage/category/update`,data)
+
+
+
 
 
 
