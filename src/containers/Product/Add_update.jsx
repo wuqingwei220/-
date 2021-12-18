@@ -91,8 +91,6 @@ const {Option} =Select
            }else{
                this.xhrEditProduct(id)  
            }
-        }else{
-           
         }
     }
     render() {
