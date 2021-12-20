@@ -51,6 +51,36 @@ export const reqProductAdd=(data)=>ajax.post(`${BASE_URL}/api/manage/product/add
 export const reqUpdateProduct=(data)=>ajax.post(`${BASE_URL}/api/manage/category/update`,data)
 
 
+// 获取角色的列表
+export const reqRoleList=(params)=>ajax.get(`${BASE_URL}/api/manage/role/list`,{params})
+
+// 新增角色
+
+
+export const reqRoleAdd=(data)=>ajax.post(`${BASE_URL}/api/manage/role/add`,data)
+
+
+//给角色分配权限
+export const reqRoleAuth=(data)=>ajax.post(`${BASE_URL}/api/manage/role/update`,{...data,auth_time:Date.now()})
+
+
+// 用户列表
+export const reqUserList=()=>ajax.get(`${BASE_URL}/api/manage/user/list`)
+
+// 添加用户
+
+export const reqUserAdd=(data)=>ajax.post(`${BASE_URL}/api/manage/user/add`,data)
+
+// 修改用户
+export const reqUserUpdate=(data)=>ajax.post(`${BASE_URL}/api/manage/user/update`,data)
+
+
+// 删除用户manage/user/delete
+
+export const reqUserDelete=(data)=>ajax.post(`${BASE_URL}/api/manage/user/delete`,data)
+
+
+
 
 
 

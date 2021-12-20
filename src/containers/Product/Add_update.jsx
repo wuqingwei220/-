@@ -41,11 +41,8 @@ const {Option} =Select
                 let result;
                 // 判断是修改还是新增
                 const {id}=this.props.match.params;
-                if(id){
-                    result=await reqUpdateProduct({...values,imgs,detail,_id})
-                }else{
-                    result =await reqProductAdd({...values,imgs,detail})
-                }
+                if(id)result=await reqUpdateProduct({...values,imgs,detail,_id})
+                else  result =await reqProductAdd({...values,imgs,detail})
                 const {status}=result;
                 if(status===0){
                     message.success("操作成功",1)
@@ -54,13 +51,11 @@ const {Option} =Select
                     message.error("操作失败！",1)
                 }
             }
-            
         })
     }
     // 获取商品接口
     xhrEditProduct=async(id)=>{
        let result = await reqProductInfo({productId:id})
-       
        const {status,data} =result;
        if(status===0){
            this.setState({
@@ -68,29 +63,21 @@ const {Option} =Select
            })
            this.refs.name.setUpdateList(data.imgs)
            this.refs.textEditor.setText(data.detail)
-       }else{
-           message.error("接口错误",1)
-       }
-
+       }else message.error("接口错误",1)
     }
     componentDidMount(){
         const {cateList,productList}=this.props;
         const {id}=this.props.match.params;
         if(cateList.length) this.setState({cateList})
         else this.xhrGetCateGory()
-        
         // 判断新增还是修改
         if(id){
            if(productList.length){
-              let result= productList.find((item)=>{
-                   return item._id===id
-               })
+               let result= productList.find(item=>item._id===id)
                this.setState({...result,isTitle:"update"})
                this.refs.name.setUpdateList(result.imgs)
                this.refs.textEditor.setText(result.detail)
-           }else{
-               this.xhrEditProduct(id)  
-           }
+           }else this.xhrEditProduct(id)  
         }
     }
     render() {

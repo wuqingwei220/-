@@ -9,7 +9,7 @@ import {addHeader} from '../../../redux/actions/header'
 const { SubMenu,Item} = Menu;
 const {Sider} = Layout;
 @connect(
-  state=>({}),
+  state=>({saveUserInfo:state.saveUserInfo}),
   {
     addHeader
   }
@@ -39,36 +39,54 @@ const {Sider} = Layout;
       this.props.addHeader({routerKey:item})  
     }
   }
+  hasAuth=(item)=>{
+   const authList=this.props.saveUserInfo.user.role.menus;
+   let init;
+   if(this.props.saveUserInfo.user.username==="admin")init=true;
+   else if(!item.children) {
+     if(authList instanceof Array && authList.includes(item.key) && authList.length){
+       init=true;
+     }
+     
+   } 
+   else if(item.children){
+      init=item.children.some((item1)=>{return authList.includes(item1.key)})
+   }
+   return init;
+  }
 //  递归生成菜单
   memulist=(traget)=>{
    return traget.map((item)=>{
+     if(this.hasAuth(item)){
       if(!item.children){
-          return (
-            <Item key={item.key}  onClick={this.getTitle(item.title)}>
-                <Link to={item.path}>
-                    <Icon type={item.icon} />
-                    <span>{item.title}</span>
-                </Link>
-            </Item>
-          )
-      }else{
-          return( 
-            <SubMenu
-                key={item.key}
-                title={
-                <span>
-                    <Icon type={item.icon}/>
-                    <span>{item.title}</span>
-                </span>
-                }
-            >
-                {
-                    this.memulist(item.children)
-                   
-                }
-             </SubMenu>
-          ) 
+        return (
+          <Item key={item.key}  onClick={this.getTitle(item.title)}>
+              <Link to={item.path}>
+                  <Icon type={item.icon} />
+                  <span>{item.title}</span>
+              </Link>
+          </Item>
+        )
+    }else{
+        return( 
+          <SubMenu
+              key={item.key}
+              title={
+              <span>
+                  <Icon type={item.icon}/>
+                  <span>{item.title}</span>
+              </span>
+              }
+          >
+              {
+                  this.memulist(item.children)
+                 
+              }
+           </SubMenu>
+        ) 
       }
+     }
+    
     })
   }
     render() {
